@@ -206,7 +206,7 @@ BOMB_PLACE:
 
     ld a, d
     and $F0
-    or TILES_BOMB_ID
+    or _TILES_BOMB_ID
     bit 0, c
     jr nz, .no_swap
     swap a
@@ -437,10 +437,10 @@ BOMB_CALCULATE_RANGES:
     jr z, .next
     ld a, d
     and $0F
-    cp TILES_BOMB_ID
+    cp _TILES_BOMB_ID
     jr z, .found_bomb
     ;Otherwise check if it's a brick
-    cp TILES_BRICK_ID
+    cp _TILES_BRICK_ID
     jr z, .found_brick
     jr .next
 

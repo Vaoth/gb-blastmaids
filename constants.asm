@@ -6,11 +6,11 @@ SECTION "Constants", ROM0
 ;Level related
 _CHARACTERS_MAP_LIMIT EQU 4
 _LEVEL_WIDTH_BYTES    EQU 8
-_LEVEL_HEIGHT_BYTES   EQU 15
+_LEVEL_HEIGHT_BYTES   EQU 17
 _LEVEL_SIZE           EQU _LEVEL_WIDTH_BYTES * _LEVEL_HEIGHT_BYTES
 
 _LEVEL_WEIGHT_WIDTH  EQU 16
-_LEVEL_WEIGHT_HEIGHT EQU 16
+_LEVEL_WEIGHT_HEIGHT EQU 17
 _LEVEL_WEIGHT_SIZE   EQU _LEVEL_WEIGHT_WIDTH * _LEVEL_WEIGHT_HEIGHT
 
 _LEVEL_TILE_MAP_SIZE EQU $0400
@@ -28,16 +28,16 @@ _WEIGHTS_BOMB         EQU $FE
 _WEIGHTS_BLOCK        EQU $FF
 
 ;Level tiles
-TILES_EMPTY_ID EQU $0
-TILES_RANGE_POW_ID EQU $1
-TILES_BOMB_POW_ID EQU $2
-TILES_SPEED_POW_ID EQU $3
-TILES_LADDER_POW_ID EQU $4
-TILES_PUSH_POW_ID EQU $5
-TILES_WALL_ID EQU $8
-TILES_BRICK_ID EQU $9
-TILES_HOLE_ID EQU $A
-TILES_BOMB_ID EQU $B
+_TILES_EMPTY_ID EQU $0
+_TILES_RANGE_POW_ID EQU $1
+_TILES_BOMB_POW_ID EQU $2
+_TILES_SPEED_POW_ID EQU $3
+_TILES_LADDER_POW_ID EQU $4
+_TILES_PUSH_POW_ID EQU $5
+_TILES_WALL_ID EQU $8
+_TILES_BRICK_ID EQU $9
+_TILES_HOLE_ID EQU $A
+_TILES_BOMB_ID EQU $B
 
 ;Bombs related
 _BOMBS_NUMBER_LIMIT     EQU 4
@@ -82,15 +82,15 @@ _ENEMY_STATE_COLLECT_TIME EQU $A0
 
 _ENEMIES_BURA_ID     EQU 1
 _ENEMIES_BURA_SPAWNY EQU $10
-_ENEMIES_BURA_SPAWNX EQU $D0
+_ENEMIES_BURA_SPAWNX EQU $F0
 
 _ENEMIES_SUTO_ID     EQU 2
-_ENEMIES_SUTO_SPAWNY EQU $D0
+_ENEMIES_SUTO_SPAWNY EQU $F0
 _ENEMIES_SUTO_SPAWNX EQU $10
 
 _ENEMIES_KANPAKU_ID     EQU 3
-_ENEMIES_KANPAKU_SPAWNY EQU $D0
-_ENEMIES_KANPAKU_SPAWNX EQU $D0
+_ENEMIES_KANPAKU_SPAWNY EQU $F0
+_ENEMIES_KANPAKU_SPAWNX EQU $F0
 
 _ENEMIES_SADA_ID    EQU 4
 _ENEMIES_COUNT      EQU 3
@@ -185,7 +185,57 @@ db HIGH(POWERUP_PUSH), LOW(POWERUP_PUSH)
 
 levels_array:
 ;  Data      , Actors   , Tile map data high    , Tile map data low   , Level map data high, Level map data low
-db %0000_0011, %0000_1111, HIGH(level1_map_data), LOW(level1_map_data), HIGH(level1_map)   , LOW(level1_map), 0, 0 ;Level 1 (index 0)
-db %0000_0011, %0000_1111, HIGH(level2_map_data), LOW(level2_map_data), HIGH(level2_map)   , LOW(level2_map), 0, 0 ;Level 2
-db %0000_0011, %0000_1111, HIGH(level3_map_data), LOW(level3_map_data), HIGH(level3_map)   , LOW(level3_map), 0, 0 ;Level 3
-db %0000_0011, %0000_1111, HIGH(level4_map_data), LOW(level4_map_data), HIGH(level4_map)   , LOW(level4_map), 0, 0 ;Level 4
+db %0000_0011, %0000_1111, HIGH(level1_tiles), LOW(level1_tiles), HIGH(level1_map)   , LOW(level1_map), 0, 0  ;Level 1 (index 0)
+db %0000_0011, %0000_1111, HIGH(level2_tiles), LOW(level2_tiles), HIGH(level2_map)   , LOW(level2_map), 0, 0  ;Level 2
+db %0000_0011, %0000_1111, HIGH(level3_tiles), LOW(level3_tiles), HIGH(level3_map)   , LOW(level3_map), 0, 0  ;Level 3
+db %0000_0011, %0000_1111, HIGH(level4_tiles), LOW(level4_tiles), HIGH(level4_map)   , LOW(level4_map), 0, 0  ;Level 4
+
+level_unique_rows:
+db $88,$88,$88,$88,$88,$88,$88,$88
+db $80,$09,$09,$90,$90,$99,$09,$00
+db $80,$80,$80,$89,$89,$80,$80,$80
+db $89,$09,$00,$90,$90,$90,$09,$09
+db $80,$80,$89,$89,$89,$89,$80,$80
+db $89,$00,$99,$09,$09,$09,$90,$09
+db $89,$89,$80,$80,$80,$80,$89,$89
+db $80,$90,$99,$09,$09,$09,$90,$90
+db $80,$09,$99,$09,$09,$09,$99,$00
+db $89,$09,$09,$90,$90,$99,$09,$09
+db $89,$80,$89,$80,$80,$89,$80,$89
+db $89,$09,$90,$09,$99,$00,$99,$09
+db $80,$89,$80,$89,$89,$80,$89,$80
+db $89,$90,$09,$90,$00,$99,$00,$99
+db $80,$89,$89,$80,$80,$89,$89,$80
+db $80,$09,$09,$90,$00,$99,$09,$00
+db $89,$09,$99,$00,$90,$09,$99,$09
+db $89,$09,$99,$99,$09,$99,$99,$09
+db $89,$80,$89,$89,$89,$89,$80,$89
+db $80,$90,$09,$99,$09,$99,$00,$90
+db $80,$89,$80,$80,$80,$80,$89,$80
+db $80,$09,$09,$09,$09,$09,$09,$00
+db $80,$80,$88,$98,$08,$98,$80,$80
+db $89,$09,$08,$09,$09,$08,$09,$09
+db $80,$89,$90,$98,$98,$90,$99,$80
+db $89,$88,$08,$09,$09,$08,$08,$89
+db $80,$90,$90,$99,$09,$90,$90,$90
+db $89,$89,$89,$80,$80,$89,$89,$89
+db $80,$00,$90,$00,$00,$00,$90,$00
+
+; Binary	Hex		Definition
+; 0000		$0		Empty
+; 0001		$1		Powerup: Increase explosion range
+; 0010		$2		Powerup: Extra bombs
+; 0011 		$3 		Powerup: Speed increase
+; 0100 		$4 		Powerup: Ladder
+; 0101 		$5 		Powerup: Pushing bombs
+; 0110 		$6
+; 0111 		$7
+; 1000 		$8 		Wall
+; 1001 		$9 		Breakable brick
+; 1010 		$A 		Hole
+; 1011 		$B 		Bomb
+; 1100 		$C 
+; 1101 		$D
+; 1110 		$E
+; 1111 		$F
+

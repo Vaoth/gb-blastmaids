@@ -56,7 +56,7 @@ POWERUP_SPAWN:
 .no_swap:
     ld [hl], a
     ld a, [de]
-    sub a, TILES_RANGE_POW_ID
+    sub a, _TILES_RANGE_POW_ID
 
     ;Draw the powerup in screen
     ld de, powerup_map_data
@@ -108,7 +108,7 @@ POWERUP_CHECK:
     ;Use the powerup type to select the correct function pointer to apply the effect
     ld a, d
     and $0F
-    sub TILES_RANGE_POW_ID
+    sub _TILES_RANGE_POW_ID
     ld hl, powerup_pointers
     sla a
     add l

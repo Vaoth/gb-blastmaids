@@ -70,9 +70,9 @@ SCROLL_UPDATE:
   xor a
 .no_y_overflow:
   ld b, 0
-  ;min(max(0, y + (SCRN_Y / 2) - SCRN_Y + 8), 15*16 - SCRN_Y)
+  ;min(max(0, y + (SCRN_Y / 2) - SCRN_Y + 8), 17*16 - SCRN_Y)
   call MATH_MINMAX
-  ld b, 15*16 - SCRN_Y
+  ld b, 17*16 - SCRN_Y
   call MATH_MINMAX
   ld a, b
   ld [rSCY], a
@@ -86,9 +86,9 @@ SCROLL_UPDATE:
   xor a
 .no_x_overflow:
   ld b, 0
-  ;min(max(0, x + (SCRN_X / 2) - SCRN_X + 8), 15*16 - SCRN_X)
+  ;min(max(0, x + (SCRN_X / 2) - SCRN_X + 8), 17*16 - SCRN_X)
   call MATH_MINMAX
-  ld b, 15*16 - SCRN_X
+  ld b, 17*16 - SCRN_X
   call MATH_MINMAX
   ld a, b
   ld [rSCX], a
@@ -414,7 +414,7 @@ CHECK_COLLISION:
     ;If the tile has collision then it will return nz
     ret nz
     ;If it doesn't have collision then we will check if it's a powerup
-    cp TILES_EMPTY_ID
+    cp _TILES_EMPTY_ID
     ret z
 
     ld a, [collisionFuncParams]
@@ -694,6 +694,8 @@ SEQUENCE_GAMEOVER:
   dec a
   ld [lives], a
 
+  ld de, $2FFF
+  call FADE_OUT
   ;Remove player and enemies from screen and reset scroll
   call OAM_CLEAR
   ld [rSCY], a

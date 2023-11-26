@@ -13,10 +13,7 @@
 	INCLUDE	"system/hwgb.inc"
 
   ;Tile includes
-  INCLUDE "gfx/level1.inc"
-  INCLUDE "gfx/level2.inc"
-  INCLUDE "gfx/level3.inc"
-  INCLUDE "gfx/level4.inc"
+  INCLUDE "gfx/levels.inc"
   INCLUDE "gfx/tiles.inc"
   INCLUDE "gfx/sprites.inc"
   INCLUDE "gfx/menu.inc"

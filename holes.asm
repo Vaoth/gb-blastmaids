@@ -33,7 +33,7 @@ HOLE_PLACE:
     ;If it is, then place a hole there and increase the counter
     call TILE_GET
     and $F0
-    or TILES_HOLE_ID
+    or _TILES_HOLE_ID
     bit 0, c
     jr nz, .no_swap
     swap a

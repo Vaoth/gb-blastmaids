@@ -163,9 +163,6 @@ MENU_OPTION_START:
     jp SEQUENCE_MAIN
 
 MENU_GAMEOVER:
-    ld de, $2FFF
-    call FADE_OUT
-
     LCDC_OFF
 
     ld hl, _SCRN0

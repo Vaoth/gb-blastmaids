@@ -484,7 +484,7 @@ ENEMY_SET_NEXT_DIRECTION:
     push de
     call TILE_GET
     and $0F
-    cp TILES_BRICK_ID
+    cp _TILES_BRICK_ID
     jr nz, .not_brick
     ld a, [enemy_intersection_bricks]
     inc a

@@ -1,16 +1,17 @@
 ;******************************************************************************************************************
 ; VARIABLES AND ARRAYS
 ;******************************************************************************************************************
-SECTION "Variables", WRAM0
+SECTION "Weight map", WRAM0[$C120]
+weight_map: ds _LEVEL_WEIGHT_SIZE
 
+SECTION "Level variables", WRAM0[$C230]
 ;Level related
 level_map: ds _LEVEL_SIZE
 currentLevel: db
 levelData: db
+level_tiles: ds 8
 
-SECTION "Weight map", WRAM0[$C120]
-weight_map: ds _LEVEL_WEIGHT_SIZE
-
+SECTION "Variables", WRAM0
 ;Bombs related
 explosionRanges: ds 4
 bombs_array: ds _BOMBS_ARRAY_SIZE
